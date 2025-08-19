@@ -41,13 +41,13 @@ class _MyHomePageState extends State<MyHomePage> {
       String password = _passwordController.text;
 
       setState(() {
-        isAuthenticated = (username == 'admin' && password == '123');
+        isAuthenticated = true;
       });
 
       if (isAuthenticated) {
         Navigator.of(context).pushReplacementNamed(
           '/second',
-          arguments: true,
+          arguments: <String, dynamic>{'isAuthenticated': isAuthenticated, 'username': username, 'password': password}
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -131,7 +131,10 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class SecondPage extends StatelessWidget {
-  const SecondPage({super.key});
+
+  final String username;
+
+  const SecondPage({super.key, required this.username});
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +149,7 @@ class SecondPage extends StatelessWidget {
             const Icon(Icons.lock_open, size: 80, color: Colors.green),
             const SizedBox(height: 16),
             const Text(style: TextStyle(fontSize: 30), 'Acesso Permitido!'),
-            const Text('Você está autenticado.'),
+            Text('Você está autenticado, $username!'),
             const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () {

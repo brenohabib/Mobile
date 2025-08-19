@@ -10,8 +10,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => const MyHomePage());
 
       case '/second':
-        if (args is bool && args == true) {
-          return MaterialPageRoute(builder: (_) => const SecondPage());
+        if (args is Map<String, dynamic> && args['isAuthenticated'] == true) {
+          return MaterialPageRoute(builder: (_) => SecondPage(username: args['username']));
         }
         return _accessDenied();
 
