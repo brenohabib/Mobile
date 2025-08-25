@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/main.dart';
+import 'package:mobile/page.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -7,7 +8,7 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => const MyHomePage());
+        return MaterialPageRoute(builder: (_) => MyHomePage());
 
       case '/second':
         if (args is Map<String, dynamic> && args['isAuthenticated'] == true) {
@@ -28,40 +29,43 @@ class RouteGenerator {
 
   static Route<dynamic> _notFound() {
     return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Página não encontrada'),
-        ),
-        body: const Center(
-          child: Text('Erro 404: Página não encontrada'),
-        ),
-      );
-    });
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Página não encontrada')
+          ),
+          body: const Center(
+            child: Text('Erro 404: Página não encontrada')
+          )
+        );
+      }
+    );
   }
 
   static Route<dynamic> _accessDenied() {
     return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: const Text('Acesso Negado'),
-        ),
-        body: const Center(
-          child: Text('Você não tem permissão para acessar esta página.'),
-        ),
-      );
-    });
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Acesso Negado')
+          ),
+          body: const Center(
+            child: Text('Você não tem permissão para acessar esta página.')
+          )
+        );
+      }
+    );
   }
 
   static Route<dynamic> _typeError(Object? args) {
     return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Erro de tipagem da rota: $args'),
-        ),
-        body: Center(
-          child: Text('Erro de tipagem da rota: $args'),
-        ),
-      );
-    });
+        return Scaffold(
+          appBar: AppBar(
+            title: Text('Erro de tipagem da rota: $args')
+          ),
+          body: Center(
+            child: Text('Erro de tipagem da rota: $args')
+          )
+        );
+      }
+    );
   }
 }
